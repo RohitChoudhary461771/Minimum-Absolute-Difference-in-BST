@@ -1,0 +1,28 @@
+
+
+class Solution {
+public:
+    void traversal(TreeNode* root,vector<int>&cont){
+        if(root==NULL)return;
+
+        traversal(root->left,cont);
+        
+        cont.push_back(root->val);
+        traversal(root->right,cont);
+    }
+    int getMinimumDifference(TreeNode* root) {
+       
+        vector<int>cont;
+       traversal(root,cont);
+       sort(cont.begin(),cont.end());
+        int ans=INT_MAX;
+        for(int i=0;i<cont.size();i++){
+            for(int j=i+1;j<cont.size();j++){
+                if(abs(cont[i]-cont[j])<ans){
+                    ans=abs(cont[i]-cont[j]);
+                }
+            }
+        }
+        return ans; 
+    }
+};
